@@ -1,5 +1,5 @@
-
 public abstract class Location {
+	
 	protected Queue aircraftInLocation; 
 	
 
