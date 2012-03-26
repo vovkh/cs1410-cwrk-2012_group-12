@@ -39,6 +39,9 @@ public class Simulation {
 		doSimulation();
 	}
 
+	/**
+	 *JAVADOC...
+	 */
 	private void doSimulation() {
 		//LOOP THROUGH SIMULATION
 		//
