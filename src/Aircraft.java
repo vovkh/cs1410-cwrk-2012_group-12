@@ -1,86 +1,50 @@
-import java.util.Random;
-
 
 public abstract class Aircraft {
-	protected String aircraftId;
-	protected double probabilityOfArrival;
-	
+	protected String aircraftType;
+	protected int aircraftId;
 	protected Location currentLocation;
-	protected int totalWaitingTime;
-	
-	protected int timeToCompleteDeparture;
-	protected int timeToCompleteLanding;
-	protected int timeToCompleteRepairs;
-	
-	
-	protected int timeTakenToTakeOff;
 	protected int timeTakenToLand;
-	protected double departedTime;
-	protected double arrivedTime;
-	protected int fuelRemaining;
-	protected int fuelConsumptionByStep;
+	protected int timeTakenToTakeOff;
+	protected Queue qu;
+
 	
-	protected Random gen = new Random(42); // Or choose a different seed
-	
-	protected Aircraft (double probabilityOfArrival, int fuelRemaining_min, int fuelRemaining_max, Location location) {
-		this.probabilityOfArrival = probabilityOfArrival;
+	public Aircraft (Location location, String aircraftType, int timeTakenToTakeOff, int timeTakenToLand) {
 		this.currentLocation = location;
-		this.fuelRemaining = generateSecondsOfFuelRemaining(fuelRemaining_min, fuelRemaining_max);
-	}
-	
-	protected Aircraft (double probabilityOfArrival) {
-		//Aircraft(String aircraftName, double probabilityOfArrival, runway1);
-	}
-	
-	
-	public void depart () {
-		// If current location is a hangar
-		// and is head of the queue to depart,
-		// assign to runway and set the timeToCompleteDeparture
+		this.timeTakenToLand = timeTakenToLand;
+		this.timeTakenToTakeOff = timeTakenToTakeOff;
+		this.aircraftType = aircraftType;	
 		
-		//TODO:: What happens if tell aircraft to depart whilst in process of departing??
 	}
-	
-	public void land () {
-		// If current location is in the air
-		// and is head of the queue to land,
-		// assign to runway and set the timeToCompleteLanding
-	}
-	
-	public void crash () {
-		// If currently departing
-		// randomly crash
-		
-		// Remove from departure queue
-	}
-	
-	public void setLocation (Location location) {
+	public void changeAircraftLocation(Location location) {	
 		this.currentLocation = location;
 	}
 	
+	public String getAircraftType() {	
+		return aircraftType;
+	}
 	
+	public int getTimeTakenToLand(){
+		return timeTakenToLand;
+	}
 	
-	/////
-	/// Should be generate number of 'ticks' of fuel remaining????
-	/////
-	protected int generateSecondsOfFuelRemaining(int min_inclusive, int max_exclusive) {
-		int numSecondsRemaining = gen.nextInt(min_inclusive) + (max_exclusive - min_inclusive);
-		//NB: min_inclusive <= numSecondsRemaining < max_exclusive
-		// Due to Random.nextInt(int) returning 0 <= x < int
+	public int getTimeTakenToTakeOff(){
+		return timeTakenToTakeOff;
+	}
+	
+	public void takeOff(Queue queName) {
+		if(queName.getQueueGroundSize()!=0){
+			queName.removeFromQueueGround(this);
+			System.out.println(getAircraftType()+" has Taken off");
+		}
+	}
+	
+	public void land(Queue queName) {
+		if(queName.getQueueAirSize()!=0){
+			queName.removeFromQueueAir(this);
+			System.out.println(getAircraftType()+" has landed");
+		}
 		
-		return numSecondsRemaining;
-	}
-	
-	
-	public void increaseWaitingTime(int x) {	
-	}
-	
-	public void printAircraftStatus() {	
-	}
-	
-	public void isWaitingToLand() {
 		
 	}
-
-
+	
 }
