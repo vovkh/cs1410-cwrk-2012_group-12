@@ -1,4 +1,7 @@
-
+/**
+ * @author Group 12
+ *
+ */
 public class Airspace extends Location 
 {
 	

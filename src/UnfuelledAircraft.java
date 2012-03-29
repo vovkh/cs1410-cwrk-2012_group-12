@@ -1,11 +1,11 @@
-
+/**
+ * @author Group 12
+ *
+ */
 public abstract class UnfuelledAircraft extends Aircraft{
 
-	public UnfuelledAircraft(Location location, String aircraftType, int timeTakenToTakeOff, int timeTakenToLand) {
-		super(location, aircraftType , timeTakenToTakeOff, timeTakenToLand);
-
+	public UnfuelledAircraft(Airport airport, String aircraftType, int timeTakenToTakeOff, int timeTakenToLand) {
+		super(airport, aircraftType , timeTakenToTakeOff, timeTakenToLand);
 	}
-	
-	
 	
 }

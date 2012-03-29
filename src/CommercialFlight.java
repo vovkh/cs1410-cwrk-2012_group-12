@@ -1,4 +1,7 @@
-
+/**
+ * @author Group 12
+ *
+ */
 public class CommercialFlight extends FuelledAircraft {
 	
 	protected static final int timeTakenToTakeOff = 120;
@@ -8,8 +11,8 @@ public class CommercialFlight extends FuelledAircraft {
 	protected Location location; 
 	protected static final String aircraftType = "Commercial Flight"; 
 
-	public CommercialFlight (Location location) {
-		super(location, aircraftType, fuelRemaining_min, fuelRemaining_max, timeTakenToTakeOff, timeTakenToLand);
+	public CommercialFlight (Airport airport) {
+		super(airport, aircraftType, fuelRemaining_min, fuelRemaining_max, timeTakenToTakeOff, timeTakenToLand);
 	}
 	
 

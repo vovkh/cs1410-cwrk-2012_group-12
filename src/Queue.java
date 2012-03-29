@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * A queue for aircraft. Aircraft may be added / removed. Used by locations to track the aircraft inside that location.
+ * @author Group 12
+ * @date 29/Mar/2012
+ */
+
 public class Queue 
 {
-	protected ArrayList<Aircraft> queueGround;
-	protected ArrayList<Aircraft> queueAir;
-	//private Aircraft testAircraft;
+	protected ArrayList<Aircraft> queue;
 	
+	/**
+	 * 
+	 */
 	public Queue(){
-		queueGround = new ArrayList<Aircraft>();
-		queueAir = new ArrayList<Aircraft>();
+		queue = new ArrayList<Aircraft>();
 		
     //test
 	//	testAircraft = new Aircraft(null, null, 0, 0);
@@ -17,36 +23,53 @@ public class Queue
 		
 	}
 	
-	
-	public void removeFromQueueGround(Aircraft aircraft) {
-		queueGround.remove(aircraft);
+	/**
+	 * Remove an aircraft from the queue
+	 * @param aircraft The aircraft to be removed
+	 */
+	public void removeFromQueue(Aircraft aircraft) {
+		queue.remove(aircraft);
 	}
 	
-	public void addToQueueGround(Aircraft aircraft) {
-		queueGround.add(aircraft);
+	/**
+	 * Get an Aircraft from the queue
+	 * @param index
+	 */
+	public Aircraft getFromQueue(int index) {
+		return queue.get(index);
 	}
 	
-	public void removeFromQueueAir(Aircraft aircraft) {
-		queueAir.remove(aircraft);
+	/**
+	 * Add an aircraft to the queue
+	 * @param aircraft aircraft to be added
+	 */
+	public void addToQueue(Aircraft aircraft) {
+		queue.add(aircraft);
 	}
 	
-	public void addToQueueAir(Aircraft aircraft) {
-		queueAir.add(aircraft);
+	
+	/**
+	 * Get the size of the queue
+	 * @return the size of the queue
+	 */
+	public int size() {
+		return queue.size();
 	}
 	
-	public void swapAircraftInQueue() {
-	}
-	
-	public int getQueueGroundSize() {
-		return queueGround.size();
-	}
-	public int getQueueAirSize() {
-		return queueAir.size();
-	}
-	public boolean findAircraftTypeInQueueGround(String aircraftType){
-		//if(queueGround.contains())...
+	/**
+	 * Check to see if there is an aircraft of type aircraftType in the queue. 
+	 * NB: Used by light aircraft / gliders to check if they can take off together
+	 * 		(light aircraft tow gliders up)
+	 * @param aircraftType	the name of the aircraft type that you are searching
+	 * @return boolean
+	 */
+	public boolean isAircraftTypeInQueue(String aircraftType){
+		for(int i=0; i<queue.size(); i++) {
+			if(queue.get(i).getAircraftType() == aircraftType) {
+				return true;
+			}
+		}
 		return false;
-		
 	}
 
 }

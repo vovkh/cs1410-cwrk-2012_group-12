@@ -1,9 +1,13 @@
+/**
+ * @author Group 12
+ *
+ */
 public abstract class FuelledAircraft extends Aircraft{
 	protected int fuelRemaining_min;
 	protected int fuelRemaining_max;
 
-	public FuelledAircraft(Location location, String aircraftType, int fuelRemaining_min,  int fuelRemaining_max, int timeTakenToTakeOff, int timeTakenToLand) {
-		super(location, aircraftType , timeTakenToTakeOff, timeTakenToLand);
+	public FuelledAircraft(Airport airport, String aircraftType, int fuelRemaining_min,  int fuelRemaining_max, int timeTakenToTakeOff, int timeTakenToLand) {
+		super(airport, aircraftType , timeTakenToTakeOff, timeTakenToLand);
 		this.fuelRemaining_min = fuelRemaining_min;
 		this.fuelRemaining_max = fuelRemaining_max;
 	}

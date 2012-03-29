@@ -1,3 +1,7 @@
+/**
+ * @author Group 12
+ *
+ */
 public class Glider extends UnfuelledAircraft {	
 	
 	protected static final int timeTakenToTakeOff = 180;
@@ -5,12 +9,14 @@ public class Glider extends UnfuelledAircraft {
 	protected Location location; 
 	protected static final String aircraftType = "Glider"; 
 
-	public Glider(Location location) {
-		super(location, aircraftType , timeTakenToTakeOff, timeTakenToLand);
+	public Glider(Airport airport) {
+		super(airport, aircraftType, timeTakenToTakeOff, timeTakenToLand);
 	}
 	
-	public void towDown(Queue queName, String aircraftType){
-		queName.findAircraftTypeInQueueGround(aircraftType);
+	
+	
+	private void takeOff(){
+		//
 	}
 
 	public Queue getLightAircraftInQueue() {

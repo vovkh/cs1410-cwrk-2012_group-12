@@ -1,50 +1,90 @@
-
+/**
+ * @author Group 12
+ *
+ */
 public abstract class Aircraft {
 	protected String aircraftType;
 	protected int aircraftId;
-	protected Location currentLocation;
+	protected Airport currentAirport;
+	protected Location location;
 	protected int timeTakenToLand;
 	protected int timeTakenToTakeOff;
-	protected Queue qu;
 
 	
-	public Aircraft (Location location, String aircraftType, int timeTakenToTakeOff, int timeTakenToLand) {
-		this.currentLocation = location;
+	public Aircraft (Airport airport, String aircraftType, int timeTakenToTakeOff, int timeTakenToLand) {
+		this.currentAirport = airport;
 		this.timeTakenToLand = timeTakenToLand;
 		this.timeTakenToTakeOff = timeTakenToTakeOff;
 		this.aircraftType = aircraftType;	
 		
 	}
-	public void changeAircraftLocation(Location location) {	
-		this.currentLocation = location;
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	public String getAircraftType() {	
 		return aircraftType;
 	}
 	
-	public int getTimeTakenToLand(){
+	public int getTimeTakenToLand() {
 		return timeTakenToLand;
 	}
 	
-	public int getTimeTakenToTakeOff(){
+	public int getTimeTakenToTakeOff() {
 		return timeTakenToTakeOff;
 	}
 	
-	public void takeOff(Queue queName) {
-		if(queName.getQueueGroundSize()!=0){
-			queName.removeFromQueueGround(this);
-			System.out.println(getAircraftType()+" has Taken off");
+	
+	public void act() {
+		int availableRunwayNumber = this.currentAirport.getAvailableRunwayNumber(); 
+
+		if(this.location instanceof Hangar) {
+			//Is currently in the airport hangar, waiting to take off			
+			if(availableRunwayNumber != -1) {
+				takeOff(availableRunwayNumber);
+			}
+			else {
+				//No runway available, do nothing
+			}
+		}
+		else if(this.location instanceof Airspace) {
+			//Is currently in the airport airspace, waiting to land
+			if(availableRunwayNumber != -1) {
+				land(availableRunwayNumber);
+			}
+			else {
+				//No runway available, do nothing
+			}
+		}
+		else if(this.location instanceof Workshop) {
+			//Is currently in the airport workshop, waiting to be repaired
+			
+			//TODO:
+			// if(aircraft has been in the workshop long enough | has been repaired) {
+			// 		return aircraft to hangars
+			// } 
+			// else {
+			// 		do nothing
+			// }
+		}
+		else {
+			//Unknown location
 		}
 	}
 	
-	public void land(Queue queName) {
-		if(queName.getQueueAirSize()!=0){
-			queName.removeFromQueueAir(this);
-			System.out.println(getAircraftType()+" has landed");
-		}
+	
+	private void takeOff( int runwayNumber ) {
+		//Assign this aircraft to the given runway number		
+		this.currentAirport.assignAircraftToRunway(runwayNumber, this);
 		
+		//Remove from hangar
+		this.currentAirport.removeFromHangars(this);
 		
+	}
+	
+	private void land( int runwayNumber ) {
+		//
 	}
 	
 }
