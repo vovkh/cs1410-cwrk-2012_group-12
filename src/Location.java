@@ -1,8 +1,8 @@
+
 public abstract class Location {
-	
 	protected Queue aircraftInLocation; 
 	
-
+	
 	public void add(Aircraft aircraft) {
 		aircraftInLocation.addToQueue(aircraft);
 	}

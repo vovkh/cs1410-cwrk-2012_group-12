@@ -1,19 +1,17 @@
 
-public class CommercialFlight extends Aircraft {
-
-	public CommercialFlight (double probabilityOfArrival) 
-	{
-		super(probabilityOfArrival);
-		
-		// Number of seconds of fuel remaining = 20mins < x < 40mins
-		// = 1200seconds < x < 2400seconds
-		fuelRemaining = gen.nextInt(1200) + 1200;
-		
-		timeTakenToTakeOff = 2 * 60; // The number of seconds that at aircraft takes to depart // = 2mins;
-		timeTakenToLand = 4 * 60; // The number of seconds that an aircraft takes to land // = 4mins;
-
+public class CommercialFlight extends FuelledAircraft {
 	
+	protected static final int timeTakenToTakeOff = 120;
+	protected static final int timeTakenToLand = 180;
+	protected static final int fuelRemaining_min = 1200; // 20 mins * 60
+	protected static final int fuelRemaining_max = 2400; // 40 mins * 60
+	protected Location location; 
+	protected static final String aircraftType = "Commercial Flight"; 
+
+	public CommercialFlight (Location location) {
+		super(location, aircraftType, fuelRemaining_min, fuelRemaining_max, timeTakenToTakeOff, timeTakenToLand);
 	}
 	
+
 
 }
