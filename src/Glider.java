@@ -4,8 +4,8 @@
  */
 public class Glider extends UnfuelledAircraft {	
 	
-	protected static final int timeTakenToTakeOff = 180;
-	protected static final int timeTakenToLand = 240;
+	protected static final int timeTakenToTakeOff = 3 * 60; //3 minutes
+	protected static final int timeTakenToLand = 4 * 60; //4 minutes
 	protected Location location; 
 	protected static final String aircraftType = "Glider"; 
 
@@ -16,7 +16,7 @@ public class Glider extends UnfuelledAircraft {
 	
 	
 	private void takeOff(){
-		//
+		//Must take off whilst being towed by 
 	}
 
 	public Queue getLightAircraftInQueue() {
