@@ -7,9 +7,8 @@ public class Glider extends Aircraft {
 	
 	public Glider(String aircraftName, double probabilityOfArrival) 
 	{
-		super(aircraftName, probabilityOfArrival);
+		super(probabilityOfArrival);
 	}
-	
 	
 	
 	public void towDown(Queue queName, Aircraft aircraftName){
