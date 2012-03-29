@@ -6,18 +6,12 @@ public class Glider extends UnfuelledAircraft {
 	protected static final String aircraftType = "Glider"; 
 
 	public Glider(Location location) {
-		super(location, aircraftType, timeTakenToTakeOff, timeTakenToLand);
-	}
-	
-	
-	public Glider(String aircraftName, double probabilityOfArrival) {
-		super(probabilityOfArrival);
+		super(location, aircraftType , timeTakenToTakeOff, timeTakenToLand);
 	}
 	
 	public void towDown(Queue queName, String aircraftType){
 		queName.findAircraftTypeInQueueGround(aircraftType);
 	}
-
 
 	public Queue getLightAircraftInQueue() {
 		return null;
