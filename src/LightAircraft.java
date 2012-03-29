@@ -2,7 +2,7 @@
  * @author Group 12
  *
  */
-public class LightAircraft extends FuelledAircraft{
+public class LightAircraft extends FuelledAircraft {
 
 	protected static final int timeTakenToTakeOff = 120;
 	protected static final  int timeTakenToLand = 180;
@@ -12,7 +12,7 @@ public class LightAircraft extends FuelledAircraft{
 	protected static final String aircraftType = "Light Aircraft"; 
 	
 	public LightAircraft(Airport airport) {
-		super(airport, aircraftType, fuelRemaining_min, fuelRemaining_max, timeTakenToTakeOff, timeTakenToLand);
+		super(airport, aircraftType, timeTakenToTakeOff, timeTakenToLand, fuelRemaining_min, fuelRemaining_max);
 	}
 
 	

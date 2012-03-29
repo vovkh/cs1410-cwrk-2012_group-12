@@ -12,7 +12,7 @@ public class CommercialFlight extends FuelledAircraft {
 	protected static final String aircraftType = "Commercial Flight"; 
 
 	public CommercialFlight (Airport airport) {
-		super(airport, aircraftType, fuelRemaining_min, fuelRemaining_max, timeTakenToTakeOff, timeTakenToLand);
+		super(airport, aircraftType, timeTakenToTakeOff, timeTakenToLand, fuelRemaining_min, fuelRemaining_max);
 	}
 	
 
