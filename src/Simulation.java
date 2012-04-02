@@ -4,15 +4,18 @@ import java.util.Random;
  *
  */
 public class Simulation {
-	private final static double COMMERCIAL_FLIGHT_PROBABILITY = 0.001; // will change later
-    private final static double GLIDER_PROBABILITY = 0.002;
-    private final static double LIGHT_AIRCRAFT_PROBABILITY = 0.005;
+	private final static double COMMERCIAL_FLIGHT_PROBABILITY = 0.001; // the chance of creating a commercial flight -- to be changed later
+    private final static double GLIDER_PROBABILITY = 0.002; // 0.2% chance of creating a glider
+    private final static double LIGHT_AIRCRAFT_PROBABILITY = 0.005; // 0.5% chance of creating a light aircraft
     private final static int SEED = 42;
     
     private static int simulationLength = 24*60*60; // 24hours; 
     private static int tickSize = 30; // 30seconds;
     
     
+ 	/**
+ 	 * @param args
+ 	 */
  	public static void main(String[] args) {
  		//SIMULATION-RELATED VARIABLES
 		Random rand = new Random(SEED);
@@ -80,17 +83,6 @@ public class Simulation {
 	
 	private static Aircraft generateAircraftBasedOnProbability(Airport airport, double probability) {
 		Aircraft newAircraft;
-		
-		Random rand = new Random(SEED);
-		
-		if(rand.nextDouble() <= 0.5) {
-			//Add to departures
-//			locationToAddAircraft = 
-		}
-		else {
-			//Add to arrivals
-		}
-		
 		
 		if(probability <= ( COMMERCIAL_FLIGHT_PROBABILITY )) {
 			newAircraft = new CommercialFlight(airport);
