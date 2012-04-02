@@ -4,36 +4,82 @@ import java.util.Random;
  *
  */
 public class Simulation {
-	private static Queue queue;
 	private final static double COMMERCIAL_FLIGHT_PROBABILITY = 0.001; // will change later
     private final static double GLIDER_PROBABILITY = 0.002;
     private final static double LIGHT_AIRCRAFT_PROBABILITY = 0.005;
     private final static int SEED = 42;
     
- 	public static void main(String[] args){
-	    
+    private static int simulationLength = 24*60*60; // 24hours; 
+    private static int tickSize = 30; // 30seconds;
+    
+    
+ 	public static void main(String[] args) {
+ 		//SIMULATION-RELATED VARIABLES
 		Random rand = new Random(SEED);
-		queue = new Queue();
+		Timer timer = new Timer(null, simulationLength, tickSize);
 		
-		
-		Aircraft newAircraft = generateAircraftBasedOnProbability(rand.nextDouble());
-		if(newAircraft != null) {
-			addAircraftToSimulation(newAircraft);
+ 		
+ 		//CREATE THE AIRPORT AND THE LOCATIONS WITHIN IT
+ 		Airport airport = new Airport();
+ 		
+ 		
+		while(!timer.isMaxSimulationTimeExceeded()) {
+			timer.advanceByTick();
+			
+			//Generate new aircraft and add to simulation
+			Aircraft newAircraft = generateAircraftBasedOnProbability(airport, rand.nextDouble());
+			if(newAircraft != null) {
+				addAircraftToSimulation(airport, newAircraft);
+			}
+			
+			
+			// QUEUEING -- CHOOSE AIRCRAFT AND INITIATE ACTION
+			// NB: Should / could be abstracted out to a separate class as is a queuing responsibility, not a simulation responsibility? 
+			/*
+			
+			Aircraft currentAircraft; // Choose which aircraft to be using this tick
+			if( aircraft is on runway ) {
+				currentAircraft = aircraft currently on runway;
+			} 
+			else if ( aircraft are waiting to land ) {
+				//FIRST:: Check for aircraft waiting to land
+				currentAircraft = first aircraft in the queue waiting to land
+			}
+			else if ( aircraft are waiting to depart ) {
+				//SECOND:: Only when there are no aircraft waiting to land may an aircraft depart
+				currentAircraft = first aircraft is the queue waiting to depart
+			}
+			else {
+				// There are no aircraft waiting to land or depart
+				// -> Do nothing
+			}
+		 	
+		 	currentAircraft.act(); // The aircraft should know its own location/status, thus .act() automatically decides whether it will land/depart/crash etc (depending on its own current location)
+			*/
+			
 		}
-	}
-	public Simulation(){
+		
 		
 	}
 	
 	
-	private static void addAircraftToSimulation(Aircraft aircraft) {
+	private static void addAircraftToSimulation(Airport airport, Aircraft aircraft) {
+		
+		Random rand = new Random(SEED);
+		
+		if(rand.nextBoolean()) { 
+			//Add to airspace, waiting to land
+			airport.addToArrivals(aircraft);
+		}
+		else {
+			//Add to hangars, waiting to depart
+			airport.addToDepartures(aircraft);
+		}
 
 	}
 	
-	private static Aircraft generateAircraftBasedOnProbability(double probability) {
+	private static Aircraft generateAircraftBasedOnProbability(Airport airport, double probability) {
 		Aircraft newAircraft;
-		
-		Location locationToAddAircraft;
 		
 		Random rand = new Random(SEED);
 		
@@ -47,13 +93,13 @@ public class Simulation {
 		
 		
 		if(probability <= ( COMMERCIAL_FLIGHT_PROBABILITY )) {
-			newAircraft = new CommercialFlight(null);
+			newAircraft = new CommercialFlight(airport);
 		}
 	    else if(probability <= ( GLIDER_PROBABILITY + COMMERCIAL_FLIGHT_PROBABILITY )) {
-	    	newAircraft = new Glider(null);
+	    	newAircraft = new Glider(airport);
 		}
 	    else if(probability <= ( LIGHT_AIRCRAFT_PROBABILITY + GLIDER_PROBABILITY + COMMERCIAL_FLIGHT_PROBABILITY )){
-	    	newAircraft = new LightAircraft(null);
+	    	newAircraft = new LightAircraft(airport);
 		}
 	    else {
 	    	newAircraft = null;
