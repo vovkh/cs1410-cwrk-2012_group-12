@@ -1,6 +1,6 @@
 /**
  * @author Group 12
- *
+ * oioehuroeuh
  */
 public abstract class Aircraft {
 	protected String aircraftType;
