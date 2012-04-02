@@ -16,15 +16,6 @@ public class Airport {
 	private Queue arrivalsQueue;
 	private Queue departuresQueue;
 	
-	private int numberOfDepartures;
-	private int numberOfArrivals;
-	private int numberOfCrashes;
-	private int totalWaitingTime;
-	
-	
-	private int airportCapacity; //Maximum number of aircraft in hangars?
-	private boolean needExpanding;
-	
 	/**
 	 * Create an instance of the airport, with only a single runway
 	 */
@@ -49,9 +40,8 @@ public class Airport {
 	 * @param numberOfRunways the number of runways that the airport should have
 	 */
 	public void createAirport (int numberOfRunways) {
-		//Initialise to sane values
-		this.numberOfCrashes = 0;
-		this.totalWaitingTime = 0;
+		//Initialise the statistics
+
 		
 		
 		//Generate the runways at the current airport
@@ -198,13 +188,6 @@ public class Airport {
 	
 	
 	/**
-	 * Keep track of how many crashes have happened at this airport.
-	 */
-	public void incrementCrashTotal() {
-		numberOfCrashes++;
-	}
-
-	/**
 	 * Add an aircraft to the departures queue. 
 	 * Currently the departures queue is held as "Hangar"s, and this method will automatically choose which hangar to assign the aircraft to. 
 	 * @param aircraft the aircraft to add to the departures.
@@ -222,13 +205,6 @@ public class Airport {
 		getAvailableAirspace().add(aircraft);
 	}
 	
-	/**
-	 * Keep track of how long the aircraft in the airport have been waiting to land and depart.
-	 */
-	public void incrementTotalWaitingTime() {
-		//Calculate number of aircraft in air/in hangars waiting to land/depart
-		//Multiply the number of aircraft calculated above by the 'tick' length and add it to the current totalWaitingTime
-	}
 	
 	/**
 	 * 
